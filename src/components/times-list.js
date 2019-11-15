@@ -6,7 +6,7 @@ function useTimes() {
 
   useEffect(() => {
     // todo: we need an unsubscribe callback not for youtube subscribers
-    firebase
+    const unsubscribe = firebase
       .firestore()
       .collection('times')
       .onSnapshot((snapshot) => {
@@ -17,6 +17,7 @@ function useTimes() {
 
         setTimes(newTimes)
       })
+    return () => unsubscribe()
   }, [])
 
   return times
